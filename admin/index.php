@@ -151,7 +151,7 @@ if ($mmid && $smid) {
 ?>
     <table>
         <tr>
-            <td>Auswahl Hauptmenupunkt</td>
+            <td>Auswahl Hauptmenü</td>
             <td>
                 <SELECT name="MMID" onchange="return submit();">
                     <option value="0">Bitte wählen</option>
@@ -176,7 +176,7 @@ if ($mmid) {
 }
 ?>
         <tr>
-            <td>Auswahl Submenupunkt</td>
+            <td>Auswahl Submenüpunkt</td>
             <td>
                 <SELECT name="SMID" <?php echo $disableSELECT2; ?> onchange="return submit();">
                     <option value="0">Bitte wählen</option>
