@@ -6,7 +6,7 @@ if (isset($_POST["commit"])) {
     $subChange = false;
 }
 if ($subChange) {
-    $cMysqli->query("DELETE from mainmenu WHERE MmID = " . $subChange );
+    $mysqli->query("DELETE from mainmenu WHERE MmID = " . $subChange );
     echo "Hauptmen&uuml;-Eintrag wurde gel&ouml;scht: " . $subChange . " <br> <br>";
 }
 ?>
@@ -18,7 +18,7 @@ if ($subChange) {
     <SELECT name="DEL_MMID" required>
         <option value="0">Bitte w&auml;hlen</option>
         <?php
-        $result = $cMysqli->query("SELECT * FROM mainmenu;");
+        $result = $mysqli->query("SELECT * FROM mainmenu;");
         while ($row = $result->fetch_assoc()) {
             echo "<option value='" . $row['MmID'] . "'>" . $row['MmName'] . "</option>";
         }

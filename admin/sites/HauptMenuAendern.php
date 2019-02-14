@@ -8,7 +8,7 @@ if (isset($_POST["commit"])) {
     $newName = false;
 }
 if ($subChange) {
-    $cMysqli->query("UPDATE mainmenu SET MmName = '" .$newName ."' WHERE MmID = " .$subChange );
+    $mysqli->query("UPDATE mainmenu SET MmName = '" .$newName ."' WHERE MmID = " .$subChange );
     echo "Hauptmen&uuml;-Eintrag wurde ge&auml;ndert: " .$subChange ." &nbsp; " .$newName ." <br> <br>";
 }
 ?>
@@ -21,7 +21,7 @@ if ($subChange) {
     <SELECT name="CHANGE_MMID" required>
         <option value="0">Bitte w&auml;hlen</option>
         <?php
-        $result = $cMysqli->query("SELECT * FROM mainmenu;");
+        $result = $mysqli->query("SELECT * FROM mainmenu;");
         while ($row = $result->fetch_assoc()) {
             echo "<option value='" . $row['MmID'] . "'>" . $row['MmName'] . "</option>";
         }
