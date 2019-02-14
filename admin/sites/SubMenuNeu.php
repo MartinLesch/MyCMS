@@ -8,7 +8,7 @@ if (isset($_POST["commit"])) {
     $mmid = false;
 }
 if ($subNeu) {
-    $cMysqli->query("INSERT INTO submenu (MmID, SmName) VALUES (" . $mmid . ", '" . $subNeu . "')");
+    $mysqli->query("INSERT INTO submenu (MmID, SmName) VALUES (" . $mmid . ", '" . $subNeu . "')");
     echo "Neuer Submen&uuml;-Eintrag wurde angelegt: " . $subNeu . " <br>";
 }
 ?>
@@ -23,7 +23,7 @@ if ($subNeu) {
     <SELECT name="HauptID" required>
         <option value="0">Bitte w&auml;hlen</option>
         <?php
-        $result = $cMysqli->query("SELECT * FROM mainmenu;");
+        $result = $mysqli->query("SELECT * FROM mainmenu;");
         while ($row = $result->fetch_assoc()) {
             echo "<option value='" . $row['MmID'] ."'>" . $row['MmName'] . "</option>";
         }

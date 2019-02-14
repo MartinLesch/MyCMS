@@ -87,7 +87,7 @@ if (!isset($user)) {
         }
         echo "<br>    ... Verbindung zu MySQL hergestellt via: " . $conn->host_info . "<br>";
 
-        $sqlData = file_get_contents('meincms.sql');
+        $sqlData = file_get_contents('cms.sql');
         $sqlDataArr = explode(';', $sqlData);
         foreach ($sqlDataArr as $query) {
             if ($query) {

@@ -6,7 +6,7 @@ if (isset($_POST["commit"])) {
     $subChange = false;
 }
 if ($subChange) {
-    $cMysqli->query("INSERT INTO mainmenu (MmName) VALUES ('" . $subChange . "')");
+    $mysqli->query("INSERT INTO mainmenu (MmName) VALUES ('" . $subChange . "')");
     echo "Neuer Hauptmen&uuml;-Eintrag wurde angelegt: " . $subChange . " <br>";
 }
 ?>
