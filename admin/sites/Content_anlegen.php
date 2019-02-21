@@ -1,5 +1,8 @@
 <?php
-require_once '../includes/upload.php';
+
+
+require_once '../includes/dbConnect.php';
+require_once 'upload.php';
 $path = false;
 if (isset($_GET["path"])) {
     $path = $_GET["path"];
@@ -103,10 +106,19 @@ if (isset($_POST["contentanlegen"])) {
         selector: '#tinyzwei',
 
     });
+    
+    function killSub(){
+        
+        document.getElementById("SMID").value="0";
+        document.getElementById("myForm").submit();
+        
+        
+        
+    }
 </script>
 <meta charset="UTF-8"> 
 
-<form action="#" method="POST">
+<form action="#" method="POST" id="myForm">
 
 <?php
 if (isset($_POST["MMID"])) {
@@ -151,7 +163,7 @@ if ($mmid && $smid) {
         <tr>
             <td>Auswahl Hauptmenü</td>
             <td>
-                <SELECT name="MMID" onchange="return submit();">
+                <SELECT name="MMID" onchange="return killSub()">
                     <option value="0">Bitte wählen</option>
 <?php
 $result = $mysqli->query("SELECT * FROM mainmenu;");
@@ -176,7 +188,7 @@ if ($mmid) {
         <tr>
             <td>Auswahl Submenüpunkt</td>
             <td>
-                <SELECT name="SMID" <?php echo $disableSELECT2; ?> onchange="return submit();">
+                <SELECT name="SMID" id="SMID" <?php echo $disableSELECT2; ?> onchange="return submit();">
                     <option value="0">Bitte wählen</option>
 <?php
 if ($mmid) {
