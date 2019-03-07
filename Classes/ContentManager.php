@@ -30,8 +30,14 @@ class ContentManager {
             }
         }
     }
-
-    function getMainMenu() {
+    function getHeaderContent(){
+        echo NeuesHauptmenue;
+    }
+    function getFuss(){
+        echo IchBinEinFuss;
+    }
+            
+                function getMainMenu() {
         $eausgabe = "";
         $result = $this->mysqli->query("SELECT * FROM mainmenu;");
         while ($resultArr = $result->fetch_assoc()) {
