@@ -6,25 +6,28 @@ class TemplateManager {
 
     private $actualTemplate = "default";
     private $mysqli;
-    private $templateSettingsAssocArr;
 
     public function __construct($mysqli) {
 
         $this->mysqli = $mysqli;
         $this->setTemplateSetting();
+        echo "<link rel='Stylesheet' href='" . $this->getCurrentLayout() . "'>";
     }
 
-    public function getActualTemplate() {
+    
+    public function getCurrentLayout() {
+        $this->actualTemplate =  "./css/" . $this->getActualTemplate() . "style.css";
         return $this->actualTemplate;
     }
 
-    public function getActualTemplateID() {
+    public function getActualTemplate() {
 
 
-        if (!$resultTemplate = $this->mysqli->query("SELECT TemplateID From template WHERE TemplateBezeichnung='" . $this->getActualTemplate() . "';")) {
-            printf("Errormessage: %s\n", $mysqli->error);
+        if (!$resultTemplate = $this->mysqli->query("SELECT TemplateBezeichnung From template WHERE isActive = 1 LIMIT 1;")) {
+            printf("Fehlernachricht: %s\n", $mysqli->error);
+            return "default";
         } else {
-            return $resultTemplate->fetch_object()->TemplateID;
+            return $resultTemplate->fetch_object()->TemplateBezeichnung;
             
         }
     }
@@ -60,27 +63,6 @@ class TemplateManager {
             $settingValues[$rowSetting["SettingLabel"]] = $rowSetting["Value"];
         }
         $this->templateSettingsAssocArr = $settingValues;
-    }
-
-    public function getTableWidth() {
-
-        //return $this-> setTemplateSetting("tableWidth");
-        //return $this-> setTemplateSetting["tableWidth"];
-        //return $this->setTemplateSetting("tableWidth");
-        //return $this->templateSetting("tableWidth");
-        return $this->templateSettingsAssocArr["tableWidth"];
-    }
-
-    public function getMenuWidth() {
-        return $this->templateSettingsAssocArr["menuWidth"];
-    }
-
-    public function getHeaderHeight() {
-        return $this->templateSettingsAssocArr["headerHeight"];
-    }
-
-    public function getFooterHeight() {
-        return $this->templateSettingsAssocArr["footerHeight"];
     }
 
 }

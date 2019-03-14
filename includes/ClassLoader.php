@@ -9,5 +9,6 @@ if (isset($_GET)) {
 }else{
     $cContentManager = new ContentManager($mysqli);
 }
+include_once "./classes/MenueManager.php";
 
 

@@ -44,25 +44,25 @@ if (!isset($user)) {
         $myfile = fopen("../includes/auto_dbConnect.php", "w") or die("Kann Datei -dbConnect.php- nicht erstellen!");
         $txt = "<?php \r\n /* \r\n * Automatisch von Install.php erstellt \r\n */ \r\n";
         fwrite($myfile, $txt);
-        $txt = "class dbConnect { \r\n  private \$mySQLi; \r\n  private \$isConnected = false; \r\n ";
+        $txt = "class dbConnect { \r\n  private \$mysqli; \r\n  private \$isConnected = false; \r\n ";
         fwrite($myfile, $txt);
         $txt = "  public function __construct() { \r\n    \$this->connect(); \r\n    } \r\n";
         fwrite($myfile, $txt);
         $txt = "  public function isConnect () { \r\n   return \$this->isConnected; \r\n  } \r\n";
         fwrite($myfile, $txt);
-        $txt = "  public function connect() { \r\n    \$this->mySQLi = new mysqli('" . $adress . "', '" . $user . "', '" . $password . "', '" . $dbName . "'); \r\n";
+        $txt = "  public function connect() { \r\n    \$this->mysqli = new mysqli('" . $adress . "', '" . $user . "', '" . $password . "', '" . $dbName . "'); \r\n";
         fwrite($myfile, $txt);
         $txt = "   \$this->isConnected = true; \r\n ";
         fwrite($myfile, $txt);
-        $txt = "  if (\$this->mySQLi->connect_errno) { \r\n ";
+        $txt = "  if (\$this->mysqli->connect_errno) { \r\n ";
         fwrite($myfile, $txt);
-        $txt = "      echo \"Fehler beim Verbinden zu MySQL: (\" . \$this->mySQLi->connect_errno . \") \" . \$this->mySQLi->connect_error; \r\n";
+        $txt = "      echo \"Fehler beim Verbinden zu MySQL: (\" . \$this->mysqli->connect_errno . \") \" . \$this->mysqli->connect_error; \r\n";
         fwrite($myfile, $txt);
         $txt = "       \$this->isConnected = false; \r\n     } \r\n ";
         fwrite($myfile, $txt);
-        $txt = "     return \$this->mySQLi; \r\n    } \r\n ";
+        $txt = "     return \$this->mysqli; \r\n    } \r\n ";
         fwrite($myfile, $txt);
-        $txt = "  public function getErrorNo(){ \r\n     return \$this->mySQLi->connect_errno; \r\n     } \r\n } \r\n ";
+        $txt = "  public function getErrorNo(){ \r\n     return \$this->mysqli->connect_errno; \r\n     } \r\n } \r\n ";
         fwrite($myfile, $txt);
         fclose($myfile);
         echo " erledigt!";
@@ -80,7 +80,7 @@ if (!isset($user)) {
         //echo $passwordEncrypted;        
 
         echo "<br> <br> 3) Datenbank wird in MySQL angelegt ...";
-        $conn = new mysqli($adress, $user, $password, "mysql");
+        $conn = new mysqli($adress, $user, $password, $dbName);
         if ($conn->connect_errno) {
             echo "<br>!!! Fehler beim Verbinden zu MySQL: (" . $conn->connect_errno . ") " . $conn->connect_error;
             exit(1);

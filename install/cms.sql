@@ -1,4 +1,4 @@
--- --------------------------------------------------------
+﻿-- --------------------------------------------------------
 -- Host:                         127.0.0.1
 -- Server Version:               10.1.36-MariaDB - mariadb.org binary distribution
 -- Server Betriebssystem:        Win32
@@ -13,8 +13,8 @@
 
 
 -- Exportiere Datenbank Struktur für cms
-CREATE DATABASE IF NOT EXISTS `cms` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `cms`;
+CREATE DATABASE IF NOT EXISTS `db_lescma` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `db_lescma`;
 
 -- Exportiere Struktur von Tabelle cms.content
 CREATE TABLE IF NOT EXISTS `content` (
