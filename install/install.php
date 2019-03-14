@@ -129,7 +129,7 @@ session_start();
                         </font>
                     </td>
                     <td>
-                        <input Type="password" name="PassAdmin" pattern=".{6,}" title="Mindestens 6-stellig" placeholder="geheim" required> <br>
+                        <input Type="password" name="PassAdmin" pattern=".{4,}" title="Mindestens 4-stellig" placeholder="geheim" required> <br>
                     </td>
                 </tr>
                 </tbody>

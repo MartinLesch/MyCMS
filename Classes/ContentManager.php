@@ -1,11 +1,4 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of ContentManager
  *
@@ -31,61 +24,25 @@ class ContentManager {
         }
     }
 
-    function getMainMenu() {
-        $eausgabe = "";
-        $result = $this->mysqli->query("SELECT * FROM mainmenu;");
-        while ($resultArr = $result->fetch_assoc()) {
-            $eausgabe .= '<a href=index.php?MmID=' . $resultArr["MmID"] . '> ' . $resultArr["MmName"] . ' </a> |';
-        }
-        return $eausgabe;
-    }
-
-    function getSubMenu($mmid) {
-        $eausgabe = "";
-        $result = $this->mysqli->query("SELECT * FROM submenu WHERE MmID=" . $mmid . ";");
-       
-        if ($mmid != NULL) {
-            while ($resultArr = $result->fetch_assoc()) {
-
-
-                $eausgabe .= '<a href=index.php?SmID=' . $resultArr["SmID"] . '> ' . $resultArr["SmName"] . ' </a><br>';
-            }
-        }
-        return $eausgabe;
-    }
-
     function getContent() {
-        $eausgabe = "";
-        $result = $this->mysqli->query("SELECT * From content LEFT JOIN subcont ON content.CID = subcont.CID WHERE SmID=" . $this->smID . ";");
-        if ($this->smID != NULL) {
-            while ($resultArr = $result->fetch_assoc()) {
-
-
-#$eausgabe .= '<a href=index.php?CID='. $resultArr["CID"] . '> '.$resultArr["CLongText"].' </a><br>';
-                $content = $resultArr["CLongText"];
-                
-                return $content;
+        if (!$this->mmID) {
+            return "Content: Es fehlt die MMID!";
+        }
+        if (!$this->smID) {
+            return "Content: Es fehlt die SMID!";
+        }
+        //return "Hier kommt der Inhalt der Seite --- irgendwann mal ...";
+        if ($result = $this->mysqli->query("SELECT PfadZurDatei FROM content WHERE SmID=" . $this->smID . " LIMIT 1;")) {
+            if ($result->num_rows > 0) {
+                $rowContent = $result->fetch_assoc();
+                return " include_once ./content/articles/" . $rowContent["PfadZurDatei"] . ".php";
+            } else {
+                return "content: Eventuell bisher kein Inhalt fuer diese SMID gespeichert?";
             }
+            
+        } else {
+            return "content: Fehler bei Abfrage Inhalt bei DB.";
         }
     }
 
-    function getMainMenuName() {
-        $result = $this->mysqli->query("SELECT * FROM mainmenu;");
-        $mainmenuname=array();
-        while ($resultArr = $result->fetch_assoc()) {
-            $mainmenuname[$resultArr["MmID"]] =  $resultArr["MmName"];
-        }
-        return $mainmenuname;
-    }
-
-    function getSubMenuName($mmID) {
-        $result = $this->mysqli->query("SELECT * FROM submenu WHERE MmID=" . $mmID . ";");
-        $submenuname=array();
-        while ($resultArr = $result->fetch_assoc()) {
-            $submenuname[$resultArr["SmID"]] =  $resultArr["SmName"];
-        }
-        return $submenuname;
-    }
-    
-    
 }
