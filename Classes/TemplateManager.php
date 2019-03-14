@@ -10,13 +10,17 @@ class TemplateManager {
     public function __construct($mysqli) {
 
         $this->mysqli = $mysqli;
-        $this->setTemplateSetting();
-        echo "<link rel='Stylesheet' href='" . $this->getCurrentLayout() . "'>";
+        //$this->setTemplateSetting();
+
     }
 
+    public function getCss() {
+        return "<link rel='Stylesheet' href='" . $this->getCurrentLayout() . "'>";
+    }
     
     public function getCurrentLayout() {
-        $this->actualTemplate =  "./css/" . $this->getActualTemplate() . "style.css";
+        return "./css/" . "default" . "/style.css";
+        $this->actualTemplate =  "./css/" . $this->getActualTemplate() . "/style.css";
         return $this->actualTemplate;
     }
 
