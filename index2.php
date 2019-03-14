@@ -17,12 +17,15 @@ require_once "./includes/ClassLoader.php";
     <body>
         <div id="Hauptmenue">
            Hauptmenue
+           <?php $this->getMainMenu(1); ?>
         </div>
         <div id="Submenue">
             Submenue
+           <?php $this->getSubMenu(1); ?>
         </div>
         <div id="Content">
             Content
+           <?php $this->getContent(); ?>
         </div>
         <div id="Fuss">
             Fuss
