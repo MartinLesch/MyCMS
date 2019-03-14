@@ -1,6 +1,4 @@
 <?php
-
-
 require_once '../includes/dbConnect.php';
 require_once 'upload.php';
 $path = false;
@@ -18,6 +16,7 @@ function get_include_contents($filename) {
 }
 
 function contentanlegen($fileName, $neucontent) {
+
     if ($neucontent != "") {
         $datei = fopen($fileName, 'w+');
         fwrite($datei, $neucontent);
@@ -33,8 +32,24 @@ if (isset($_POST["contentanlegen"])) {
         $PfadZurDateiTemp = $_POST["contentname"];
     }
     contentanlegen("../content/articles/" . $PfadZurDateiTemp . ".php", $_POST["textareatiny"]);
-    if (!$result = $mysqli->query("INSERT INTO content (PfadZurDatei,smid) VALUES ('" . $PfadZurDateiTemp . "'," . $_POST["SMID"] . ");")) {
-        echo "Speichern nein!";
+
+    echo $PfadZurDateiTemp;
+
+    $result = $mysqli->query("SELECT * FROM content WHERE PfadZurDatei =' " . $PfadZurDateiTemp . "';");
+    while($resultVorhanden = $result->fetch_assoc()){
+        
+    }
+
+    print_r($resultVorhanden);
+
+    if ($resultVorhanden["PfadZurDatei"] != "") {
+        if ($result = $mysqli->query("UPDATE content (PfadZurDatei,smid) VALUES ('" . $PfadZurDateiTemp . "'," . $_POST["SMID"] . ");")) {
+            echo "Speichern nein!";
+        }
+    }else {
+        if (!$result = $mysqli->query("INSERT content (PfadZurDatei,smid) VALUES ('" . $PfadZurDateiTemp . "'," . $_POST["SMID"] . ");")) {
+            echo "Speichern nein!";
+        }
     }
 }
 ?>
@@ -106,14 +121,14 @@ if (isset($_POST["contentanlegen"])) {
         selector: '#tinyzwei',
 
     });
-    
-    function killSub(){
-        
-        document.getElementById("SMID").value="0";
+
+    function killSub() {
+
+        document.getElementById("SMID").value = "0";
         document.getElementById("myForm").submit();
-        
-        
-        
+
+
+
     }
 </script>
 <meta charset="UTF-8"> 
@@ -179,12 +194,12 @@ while ($row = $result->fetch_assoc()) {
                 </SELECT>
             </td>
         </tr>
-<?php
-$disableSELECT2 = "disabled";
-if ($mmid) {
-    $disableSELECT2 = "";
-}
-?>
+                    <?php
+                    $disableSELECT2 = "disabled";
+                    if ($mmid) {
+                        $disableSELECT2 = "";
+                    }
+                    ?>
         <tr>
             <td>Auswahl Submenüpunkt</td>
             <td>
