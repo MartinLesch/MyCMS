@@ -4,18 +4,29 @@
 
 class TemplateManager {
 
-    private $actualTemplate = "default";
+    private $actualTemplate;
     private $mysqli;
+    private $draft;
 
-    public function __construct($mysqli) {
+    public function __construct($mysqli, $draft) {
+        $this->draft = $draft;
+        if ($this->draft) {
+            echo "Konstruktor der Klasse TemplateManager" . " <br>";
+        }
 
         $this->mysqli = $mysqli;
-        //$this->setTemplateSetting();
-
+        $this->actualTemplate = "default";
+        if ($this->draft) {
+            echo "Feldinhalt actualTemplate: " . $this->actualTemplate . " <br>";
+        }
     }
 
     public function getCss() {
-        return "<link rel='Stylesheet' href='" . $this->getCurrentLayout() . "'>";
+        if ($this->draft) {
+            echo "Funktion getCss in der Klasse TemplateManager" . " <br>";
+        }
+        return "<link rel='Stylesheet' type='text/css' href='" . "./css/default/style.css" . "'>" . " <br>";
+        //return "<link rel='Stylesheet' href='" . $this->getCurrentLayout() . "'>";
     }
     
     public function getCurrentLayout() {
