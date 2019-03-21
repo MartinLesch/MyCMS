@@ -18,5 +18,8 @@ if (isset($_GET)) {
     $cContentManager = new ContentManager($mysqli);
 }
 include_once "./classes/MenueManager.php";
-
-
+if (isset($_GET)) {
+    $cMenueManager = new MenueManager($mysqli, $_GET);
+}else{
+    $cMenueManager = new MenueManager($mysqli);
+}

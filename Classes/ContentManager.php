@@ -29,6 +29,7 @@ class ContentManager {
         if (!$this->mmID) {
             return "Content: Es fehlt die MMID!";
         }
+        
         if (!$this->smID) {
             return "Content: Es fehlt die SMID!";
         }

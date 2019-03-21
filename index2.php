@@ -34,11 +34,13 @@ require_once "./includes/ClassLoader.php";
            Kopf
         </div>
         <div class="Hauptmenue">
-           Hauptmenue
+            Hauptmenue <br>
+           <?php echo $cMenueManager->getMainMenu(); ?>
         </div>
         
         <div class="Submenue">
-            Submenue
+            Submenue <br>
+           <?php echo $cMenueManager->getSubMenu(); ?>
         </div>
         
         <div class="Content">
@@ -50,5 +52,7 @@ require_once "./includes/ClassLoader.php";
             Fuss
         </div>
     </body>
+    
+    
 </html>
 
