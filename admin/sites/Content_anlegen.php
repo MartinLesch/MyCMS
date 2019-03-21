@@ -25,32 +25,32 @@ function contentanlegen($fileName, $neucontent) {
 }
 
 if (isset($_POST["contentanlegen"])) {
+    
+    
+    
     if (isset($_POST["contentnameVorhanden"])) {
-        unlink("../content/articles/" . $_POST["contentnameVorhanden"] . ".php");
+        unlink("../content/articles/" . $_POST["SMID"] . "_" . $_POST["contentnameVorhanden"] . ".php");
         $PfadZurDateiTemp = $_POST["contentnameVorhanden"];
     } else {
         $PfadZurDateiTemp = $_POST["contentname"];
     }
-    contentanlegen("../content/articles/" . $PfadZurDateiTemp . ".php", $_POST["textareatiny"]);
+    
+    
+    
+    contentanlegen("../content/articles/" . $_POST["SMID"] . "_" . $PfadZurDateiTemp . ".php", $_POST["textareatiny"]);
 
-    echo $PfadZurDateiTemp;
-
-    $result = $mysqli->query("SELECT * FROM content WHERE PfadZurDatei =' " . $PfadZurDateiTemp . "';");
-    while($resultVorhanden = $result->fetch_assoc()){
+    
+    
+    if(file_exists ("../content/articles/" . $_POST["SMID"] . "_" . $PfadZurDateiTemp . ".php")){
+      
         
-    }
-
-    print_r($resultVorhanden);
-
-    if ($resultVorhanden["PfadZurDatei"] != "") {
-        if ($result = $mysqli->query("UPDATE content (PfadZurDatei,smid) VALUES ('" . $PfadZurDateiTemp . "'," . $_POST["SMID"] . ");")) {
-            echo "Speichern nein!";
-        }
-    }else {
-        if (!$result = $mysqli->query("INSERT content (PfadZurDatei,smid) VALUES ('" . $PfadZurDateiTemp . "'," . $_POST["SMID"] . ");")) {
-            echo "Speichern nein!";
-        }
-    }
+     }
+     else
+     {
+         $mysqli->query("INSERT content (PfadZurDatei,smid) VALUES ('" . $PfadZurDateiTemp . "'," . $_POST["SMID"] . ");");
+         
+     }
+    
 }
 ?>
 
@@ -166,7 +166,7 @@ if ($mmid && $smid) {
     if ($result = $mysqli->query("SELECT * FROM content WHERE SmID=" . $smid . ";")) {
         if ($result->num_rows > 0) {
             $rowContent = $result->fetch_assoc();
-            $content = get_include_contents("../content/articles/" . $rowContent["PfadZurDatei"] . ".php");
+            $content = get_include_contents("../content/articles/". $_POST["SMID"] ."_" .  $rowContent["PfadZurDatei"] . ".php");
             $disabledContent = "disabled";
         }
     } else {
