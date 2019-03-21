@@ -25,6 +25,7 @@ class ContentManager {
     }
 
     function getContent() {
+        //test
         if (!$this->mmID) {
             return "Content: Es fehlt die MMID!";
         }
