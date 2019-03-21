@@ -1,6 +1,4 @@
 <?php
-
-
 require_once '../includes/dbConnect.php';
 require_once 'upload.php';
 $path = false;
@@ -18,6 +16,7 @@ function get_include_contents($filename) {
 }
 
 function contentanlegen($fileName, $neucontent) {
+
     if ($neucontent != "") {
         $datei = fopen($fileName, 'w+');
         fwrite($datei, $neucontent);
@@ -26,16 +25,32 @@ function contentanlegen($fileName, $neucontent) {
 }
 
 if (isset($_POST["contentanlegen"])) {
+    
+    
+    
     if (isset($_POST["contentnameVorhanden"])) {
-        unlink("../content/articles/" . $_POST["contentnameVorhanden"] . ".php");
+        unlink("../content/articles/" . $_POST["SMID"] . "_" . $_POST["contentnameVorhanden"] . ".php");
         $PfadZurDateiTemp = $_POST["contentnameVorhanden"];
     } else {
         $PfadZurDateiTemp = $_POST["contentname"];
     }
-    contentanlegen("../content/articles/" . $PfadZurDateiTemp . ".php", $_POST["textareatiny"]);
-    if (!$result = $mysqli->query("INSERT INTO content (PfadZurDatei,smid) VALUES ('" . $PfadZurDateiTemp . "'," . $_POST["SMID"] . ");")) {
-        echo "Speichern nein!";
-    }
+    
+    
+    
+    contentanlegen("../content/articles/" . $_POST["SMID"] . "_" . $PfadZurDateiTemp . ".php", $_POST["textareatiny"]);
+
+    
+    
+    if(file_exists ("../content/articles/" . $_POST["SMID"] . "_" . $PfadZurDateiTemp . ".php")){
+      
+        
+     }
+     else
+     {
+         $mysqli->query("INSERT content (PfadZurDatei,smid) VALUES ('" . $PfadZurDateiTemp . "'," . $_POST["SMID"] . ");");
+         
+     }
+    
 }
 ?>
 
@@ -106,14 +121,14 @@ if (isset($_POST["contentanlegen"])) {
         selector: '#tinyzwei',
 
     });
-    
-    function killSub(){
-        
-        document.getElementById("SMID").value="0";
+
+    function killSub() {
+
+        document.getElementById("SMID").value = "0";
         document.getElementById("myForm").submit();
-        
-        
-        
+
+
+
     }
 </script>
 <meta charset="UTF-8"> 
@@ -151,7 +166,7 @@ if ($mmid && $smid) {
     if ($result = $mysqli->query("SELECT * FROM content WHERE SmID=" . $smid . ";")) {
         if ($result->num_rows > 0) {
             $rowContent = $result->fetch_assoc();
-            $content = get_include_contents("../content/articles/" . $rowContent["PfadZurDatei"] . ".php");
+            $content = get_include_contents("../content/articles/". $_POST["SMID"] ."_" .  $rowContent["PfadZurDatei"] . ".php");
             $disabledContent = "disabled";
         }
     } else {
@@ -179,12 +194,12 @@ while ($row = $result->fetch_assoc()) {
                 </SELECT>
             </td>
         </tr>
-<?php
-$disableSELECT2 = "disabled";
-if ($mmid) {
-    $disableSELECT2 = "";
-}
-?>
+                    <?php
+                    $disableSELECT2 = "disabled";
+                    if ($mmid) {
+                        $disableSELECT2 = "";
+                    }
+                    ?>
         <tr>
             <td>Auswahl Submenüpunkt</td>
             <td>

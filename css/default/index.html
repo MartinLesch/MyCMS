@@ -8,16 +8,20 @@
         
     </head>
     <body>
-        <div id="Hauptmenue">
-           Hauptmenue
+        <div class="Hauptmenue" id="Hauptmenue">
+            <?php $cContentmanager->getHeaderContent(); ?>
+            Hauptmenue
         </div>
-        <div id="Submenue">
+        <div class="Submenu" id="Submenue">
+            <?php $cContentmanager->getSubMenu(); ?>
             Submenue
         </div>
-        <div id="Content">
+        <div class="Content" id="Content">
+            <?php $cContentmanager->getContent(); ?>
             Content
         </div>
-        <div id="Fuss">
+        <div class="Fuss" id="Fuss">
+            <?php $cContentmanager->getFuss(); ?>
             Fuss
         </div>
     </body>
