@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description of ContentManager
  *
@@ -10,13 +11,14 @@ class ContentManager {
     private $mmID = null;
     private $smID = null;
 
-    public function __construct($MySQLi, $GET = null) {
+    public function __construct($MySQLi, $getresourc = null) {
         $this->mysqli = $MySQLi;
-        if ($GET) {
-            if (isset($GET['MmID'])) {
-                $this->mmID = $GET['MmID'];
-            } else if (isset($GET['SmID'])) {
-                $this->smID = $GET['SmID'];
+        if ($getresourc) {
+            if (isset($getresourc['MmID'])) {
+                $this->mmID = $getresourc['MmID'];
+            }
+            if (isset($getresourc['SmID'])) {
+                $this->smID = $getresourc['SmID'];
                 $result = $this->mysqli->query("SELECT MmID FROM submenu WHERE SmID=" . $this->smID . ";");
                 $resultArr = $result->fetch_assoc();
                 $this->mmID = $resultArr["MmID"];
@@ -25,25 +27,27 @@ class ContentManager {
     }
 
     function getContent() {
+        //$returnArr[0]==error Message
+        $returnArr = array(false, "");
         //test
         if (!$this->mmID) {
-            return "Content: Es fehlt die MMID!";
-        }
-        if (!$this->smID) {
-            return "Content: Es fehlt die SMID!";
-        }
-        //return "Hier kommt der Inhalt der Seite --- irgendwann mal ...";
-        if ($result = $this->mysqli->query("SELECT PfadZurDatei FROM content WHERE SmID=" . $this->smID . " LIMIT 1;")) {
-            if ($result->num_rows > 0) {
-                $rowContent = $result->fetch_assoc();
-                return " include_once ./content/articles/" . $rowContent["PfadZurDatei"] . ".php";
-            } else {
-                return "content: Eventuell bisher kein Inhalt fuer diese SMID gespeichert?";
-            }
-            
+            $returnArr[0] = "Content: Es fehlt die MMID!";
+        } else if (!$this->smID) {
+            $returnArr[0] = "Content: Es fehlt die SMID!!!!!";
         } else {
-            return "content: Fehler bei Abfrage Inhalt bei DB.";
+            //return "Hier kommt der Inhalt der Seite --- irgendwann mal ...";
+            if ($result = $this->mysqli->query("SELECT PfadZurDatei FROM content WHERE SmID=" . $this->smID . " LIMIT 1;")) {
+                if ($result->num_rows > 0) {
+                    $rowContent = $result->fetch_assoc();
+                    $returnArr[1] = "../content/articles/". $_POST["SMID"] ."_" .  $rowContent["PfadZurDatei"] . ".php";
+                } else {
+                    $returnArr[0] = "content: Eventuell bisher kein Inhalt fuer diese SMID gespeichert?";
+                }
+            } else {
+                $returnArr[0] = "content: Fehler bei Abfrage Inhalt bei DB.";
+            }
         }
+        return $returnArr;
     }
 
 }

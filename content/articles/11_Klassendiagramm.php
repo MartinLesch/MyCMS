@@ -3,6 +3,6 @@
 <head>
 </head>
 <body>
-<p>asgf</p>
+<p>Hier k&ouml;nnte ein Klassendiagramm stehen</p>
 </body>
 </html>
