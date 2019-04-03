@@ -16,43 +16,49 @@ require_once "./includes/ClassLoader.php";
 <!DOCTYPE html>
 <html>
     <head>
-        <?php 
+        <?php
         if ($draft) {
             echo "Hole css ... " . "<br>";
         }
-        echo $cTemplateManager->getCss(); 
+        echo $cTemplateManager->getCss();
         // <link rel="stylesheet" type="text/css" href="./css/default/style.css">
         ?>
         <meta charset="UTF-8">
         <title>Beispiel CMS VIF4</title>
         <!-- <link rel="stylesheet" href="./css/default/style.css"> !-->
-           <!--<?php //echo $this->getSubMenu(1); ?>!-->
-        
+           <!--<?php //echo $this->getSubMenu(1);  ?>!-->
+
     </head>
     <body>
         <div class="Kopf">
-           Kopf
+            Kopf
         </div>
         <div class="Hauptmenue">
             Hauptmenue <br>
-           <?php echo $cMenueManager->getMainMenu(); ?>
+            <?php echo $cMenueManager->getMainMenu(); ?>
         </div>
-        
+
         <div class="Submenue">
             Submenue <br>
-           <?php echo $cMenueManager->getSubMenu(); ?>
+            <?php echo $cMenueManager->getSubMenu(); ?>
         </div>
-        
+
         <div class="Content">
             Content <br> 
-            <?php echo $cContentManager->getContent(); ?>
+            <?php
+            if ($cContentManager->getContent()[0]) {
+                echo $cContentManager->getContent()[0];
+            } else {
+                include $cContentManager->getContent()[1];
+            }
+            ?>
         </div>
-        
+
         <div class="Fuss">
             Fuss
         </div>
     </body>
-    
-    
+
+
 </html>
 

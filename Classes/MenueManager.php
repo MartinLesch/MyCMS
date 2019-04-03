@@ -33,17 +33,13 @@ class MenueManager {
     }
 
     function getSubMenu() {
-  
+
         if ($this->mmID) {
             $result = $this->mysqli->query("SELECT * FROM submenu WHERE MmID=" . $this->mmID . ";");
             while ($row = $result->fetch_assoc()) {
-            echo "<a href='index2.php?MmID=" . $row['MmID'] . "&SmID=" .$row['SmID'] . "'>" . $row['SmName'] . " </a> <br>";  
-                
-                
-                                     }
-                            
-                    
-                }
+                echo "<a href='index2.php?MmID=" . $row['MmID'] . "&SmID=" . $row['SmID'] . "'>" . $row['SmName'] . " </a> <br>";
             }
-
         }
+    }
+
+}

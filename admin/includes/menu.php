@@ -1,6 +1,6 @@
 
 <?php
-$linkArray=array("Content anlegen","Menu bearbeiten");
+$linkArray=array("Content anlegen","Menu bearbeiten","Style auswaehlen");
 
 $idx=0;
 while(true){
