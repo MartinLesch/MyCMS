@@ -15,7 +15,7 @@ class TemplateManager {
         }
 
         $this->mysqli = $mysqli;
-        $this->actualTemplate = "default";
+        $this->actualTemplate = "Sommer";
         if ($this->draft) {
             echo "Feldinhalt actualTemplate: " . $this->actualTemplate . " <br>";
         }
@@ -25,18 +25,17 @@ class TemplateManager {
         if ($this->draft) {
             echo "Funktion getCss in der Klasse TemplateManager" . " <br>";
         }
-        return "<link rel='Stylesheet' type='text/css' href='" . "./css/default/style.css" . "'>" . " <br>";
+        return "<link rel='Stylesheet' type='text/css' href='" . $this->getCurrentLayout() . "'>" . " <br>";
         //return "<link rel='Stylesheet' href='" . $this->getCurrentLayout() . "'>";
     }
     
     public function getCurrentLayout() {
-        return "./css/" . "default" . "/style.css";
+        //return "./css/" . "default" . "/style.css";
         $this->actualTemplate =  "./css/" . $this->getActualTemplate() . "/style.css";
         return $this->actualTemplate;
     }
 
     public function getActualTemplate() {
-
 
         if (!$resultTemplate = $this->mysqli->query("SELECT TemplateBezeichnung From template WHERE isActive = 1 LIMIT 1;")) {
             printf("Fehlernachricht: %s\n", $mysqli->error);

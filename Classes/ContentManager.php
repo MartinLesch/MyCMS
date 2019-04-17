@@ -39,7 +39,7 @@ class ContentManager {
             if ($result = $this->mysqli->query("SELECT PfadZurDatei FROM content WHERE SmID=" . $this->smID . " LIMIT 1;")) {
                 if ($result->num_rows > 0) {
                     $rowContent = $result->fetch_assoc();
-                    $returnArr[1] = "../content/articles/". $_POST["SMID"] ."_" .  $rowContent["PfadZurDatei"] . ".php";
+                    $returnArr[1] = "./content/articles/". $this->smID ."_" .  $rowContent["PfadZurDatei"] . ".php";
                 } else {
                     $returnArr[0] = "content: Eventuell bisher kein Inhalt fuer diese SMID gespeichert?";
                 }

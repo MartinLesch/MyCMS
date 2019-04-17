@@ -35,11 +35,7 @@ if (isset($_POST["contentanlegen"])) {
         $PfadZurDateiTemp = $_POST["contentname"];
     }
     
-    
-    
-    contentanlegen("../content/articles/" . $_POST["SMID"] . "_" . $PfadZurDateiTemp . ".php", $_POST["textareatiny"]);
-
-    
+   
     
     if(file_exists ("../content/articles/" . $_POST["SMID"] . "_" . $PfadZurDateiTemp . ".php")){
       
@@ -50,6 +46,10 @@ if (isset($_POST["contentanlegen"])) {
          $mysqli->query("INSERT content (PfadZurDatei,smid) VALUES ('" . $PfadZurDateiTemp . "'," . $_POST["SMID"] . ");");
          
      }
+     
+    
+    contentanlegen("../content/articles/" . $_POST["SMID"] . "_" . $PfadZurDateiTemp . ".php", $_POST["textareatiny"]);
+
     
 }
 ?>
