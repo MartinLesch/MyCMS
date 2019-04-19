@@ -4,20 +4,15 @@ session_start();
  * install.php - Eingabeformular fuer installation cms
  * ... startet exec_intall.php nachdem das Formular ausgefuellt ist
  * ... benutzer, zugangsdaten zu sql-instanz
- * ... anlage .htpasswd mit admin-pass
  */
 ?>
 <html>
     <meta charset="UTF-8" />
     <meta http-equiv="expires" content="0" />
     <meta name="author" content="Martin Lesch" />
-    <meta name="date" content="2018-63-11T23:19:37+02:00" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta name="date" content="2019-04-19T23:19:37+02:00" />
     <meta name="description" content="Installation MeinCMS Schulprojekt VIF4." />
     <meta name="keywords" lang="de" content="HTML, PHP, VIF4, MeinCMS, Installation, BBS2, LeerMartin Lesch, Deutsch" />
-    <meta name="keywords" lang="en-us" content="HTML, PHP, MyCMS, Installation, school, VIF4, BBS2, Leer, Martin Lesch, german" />
-    <meta name="keywords" lang="en" content="HTML, PHP, MyCMS, Installation, school, VIF4, BBS2, Leer, Martin Lesch, german" />
-    <meta name="robots" content="noindex,nofollow" />
     <head>
         <title>
             Install MyCMS
@@ -28,8 +23,8 @@ session_start();
         <h1>
             Installation MeinCMS <br>
         </h1>
-        Die Datenbank und die Passwort-Datei fuer den Admin-Zugriff wird <br>
-        im Anschluss erstellt. Hierzu sind einge Angaben erforderlich. <br>
+        Die Datenbank muss existieren, das Admin-Verzeichnis sollte nachfolgend <br>
+        geschuetzt werden.  <br>
         Bitte fuellen Sie die folgenden Felder entsprechend aus. <font color="red"> Die <br>
         Zeilen in roter Schrift sind zwingend auszufuellen. </font> <br>
         Diese Installation kann nur ein mal ausgefuehrt werden. <br> 
@@ -114,22 +109,22 @@ session_start();
                 </tr>
                 <tr>
                     <td>
-                        <font color="red">
+                        <font color="black">
                         Benutzername Admin: &nbsp;
                         </font>
                     </td>
                     <td>
-                        <input Type="text" name="UserAdmin" placeholder="admin" required> <br>
+                        <input Type="text" name="UserAdmin" placeholder="admin" > <br>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <font color="red">
+                        <font color="black">
                         Passwort Admin: &nbsp;
                         </font>
                     </td>
                     <td>
-                        <input Type="password" name="PassAdmin" pattern=".{4,}" title="Mindestens 4-stellig" placeholder="geheim" required> <br>
+                        <input Type="password" name="PassAdmin" pattern=".{4,}" title="Mindestens 4-stellig" placeholder="geheim" > <br>
                     </td>
                 </tr>
                 </tbody>
