@@ -1,11 +1,12 @@
-<?php
+ <?php
+ // Import der Klassen die für die SQL Verbindung und den WYSIWYG Editor benötigt werden
 require_once '../includes/dbConnect.php';
 require_once 'upload.php';
 $path = false;
 if (isset($_GET["path"])) {
     $path = $_GET["path"];
 }
-
+// Bereitstellen der Funktion get_include_contents
 function get_include_contents($filename) {
     if (is_file($filename)) {
         ob_start();
@@ -14,7 +15,7 @@ function get_include_contents($filename) {
     }
     return false;
 }
-
+// Deklariert eine Funktion contentanlegen
 function contentanlegen($fileName, $neucontent) {
 
     if ($neucontent != "") {

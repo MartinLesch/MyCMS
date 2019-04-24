@@ -1,11 +1,13 @@
 <?php
 
+//class ManueManager stellt die Main- und dazugehörigen Submenus aus der DB bereit
 class MenueManager {
 
     private $mysqli;
     private $mmID = null;
     private $smID = null;
 
+    // Deklariert einen public Konstruktor und speichert die IDs in die Variable $GET
     public function __construct($MySQLi, $GET = null) {
         $this->mysqli = $MySQLi;
         if ($GET) {
@@ -19,7 +21,7 @@ class MenueManager {
             }
         }
     }
-
+    // Deklariert einen public Konstruktor getMainMenu der die MainMenus aus der DB abruft und in einem Link darstellt
     function getMainMenu() {
 
 
@@ -31,7 +33,7 @@ class MenueManager {
             echo "<a href='index2.php?MmID=" . $row['MmID'] . "'>" . $row['MmName'] . " </a> &nbsp";
         }
     }
-
+    // Deklariert einen public Konstruktor getMainMenu der die MainMenus aus der DB abruft und in einem Link darstellt
     function getSubMenu() {
 
         if ($this->mmID) {
