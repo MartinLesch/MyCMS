@@ -1,5 +1,8 @@
 
+
+
 <?php
+//stellt das AdminMenü dar und generiert anhand einer while Schleife die entsprechenden href Links
 $linkArray=array("Content anlegen","Menu bearbeiten","Style auswaehlen");
 
 $idx=0;

@@ -7,7 +7,7 @@ class TemplateManager {
     private $actualTemplate;
     private $mysqli;
     private $draft;
-
+    // Deklariert einen public Konstruktor der Klasse TemplateManager inkl. Fehlerausgabe
     public function __construct($mysqli, $draft) {
         $this->draft = $draft;
         if ($this->draft) {
@@ -20,7 +20,7 @@ class TemplateManager {
             echo "Feldinhalt actualTemplate: " . $this->actualTemplate . " <br>";
         }
     }
-
+    // Deklariert eine Funktion getCss in der Klasse TemplateManager
     public function getCss() {
         if ($this->draft) {
             echo "Funktion getCss in der Klasse TemplateManager" . " <br>";
@@ -28,13 +28,13 @@ class TemplateManager {
         return "<link rel='Stylesheet' type='text/css' href='" . $this->getCurrentLayout() . "'>" . " <br>";
         //return "<link rel='Stylesheet' href='" . $this->getCurrentLayout() . "'>";
     }
-    
+    // eine Funktion die die aktuelle css Datei prüft
     public function getCurrentLayout() {
         //return "./css/" . "default" . "/style.css";
         $this->actualTemplate =  "./css/" . $this->getActualTemplate() . "/style.css";
         return $this->actualTemplate;
     }
-
+    // eine Funktion die das IsActive=1 (aktive) Template lädt und ggf. SQL Fehler ausgibt
     public function getActualTemplate() {
 
         if (!$resultTemplate = $this->mysqli->query("SELECT TemplateBezeichnung From template WHERE isActive = 1 LIMIT 1;")) {
